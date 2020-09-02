@@ -13,6 +13,7 @@ export class MapComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
    this.initMap();
+   
   }
 
   private initMap(): void {

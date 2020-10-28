@@ -20,7 +20,7 @@ L.Marker.prototype.options.icon = iconDefault;
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
-  styleUrls: ['./map.component.scss']
+  styleUrls: ['./map.component.css']
 })
 export class MapComponent implements AfterViewInit {
 
@@ -29,6 +29,7 @@ export class MapComponent implements AfterViewInit {
   selectedMunicipio;
   selectedUnidad;
   selectedLocalidad;
+  poblacion;
 
 
   arrEstados= [];
@@ -104,6 +105,18 @@ export class MapComponent implements AfterViewInit {
      console.log(localidades);
      
     this.arrLocalidades = localidades;
+
+   });
+ 
+ }
+
+ changeLocalidad()
+ {
+   this.dataApiService.getPoblacion(this.selectedMunicipio, this.selectedEstado, this.selectedMunicipio)
+   .subscribe((poblacion: any) => {
+     console.log(poblacion);
+     
+    this.poblacion = poblacion[0].pobtot;
 
    });
  

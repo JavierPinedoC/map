@@ -9,7 +9,7 @@ import { Unidades } from '../models/unidades';
 import { Denues } from '../models/denues';
 
 import { Localidades } from '../models/localidades';
-
+import { Poblacion } from '../models/poblacion';
 @Injectable({
   providedIn: 'root'
 })
@@ -61,16 +61,17 @@ export class DataApiService {
       )
     }
 
-    // getPoblacion(idlocalidad, idestado, idmunicipio): Observable<Poblacion> {
-    //   console.log("poblacion: " + this.apiURL);
-    //   return this.http.get<Poblacion>(this.apiURL + 'poblacion?localidad=' + idlocalidad, this.httpOptions)
-    //   .pipe(
-    //     retry(1),
-    //     catchError(this.handleError)
-    //   )
-    // }
-  
-   
+    getPoblacion(idlocalidad, idestado, idmunicipio): Observable<Poblacion> {
+      console.log("poblacion: " + this.apiURL);
+      return this.http.get<Poblacion>(this.apiURL + 'poblacion?idlocalidad=' + idlocalidad + '&idestado='+idestado+'&idmunicipio='+idmunicipio, this.httpOptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      )
+    }   
+
+    // poblacion?idlocalidad=1&idestado=1&idmunicipio=1
+
   getUnidades(): Observable<Unidades> {
     console.log("unidades: " + this.apiURL);
     return this.http.get<Unidades>(this.apiURL + 'categorias', this.httpOptions)

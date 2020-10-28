@@ -26,15 +26,23 @@ export class MapComponent implements AfterViewInit {
 
   private map;
   selectedEstado;
+  selectedMunicipio;
+  selectedUnidad;
+  selectedLocalidad;
 
 
   arrEstados= [];
+  arrMunicipios = [];
+  arrActividades = [];
+  arrLocalidades = [];
+
   constructor(private markerService: MarkerService, private dataApiService: DataApiService) {
   }
 
   ngAfterViewInit(): void {
     // this.getEstados();
     this.getAllEstados();
+    this.getUnidades();
     this.initMap();
     // this.markerService.makeCapitalMarkers(this.map);
   }
@@ -64,8 +72,53 @@ export class MapComponent implements AfterViewInit {
 
   private getAllEstados(){
     this.dataApiService.getAllEstados().subscribe((estados:any)=> {
-      this.arrEstados = estados.content;
+      this.arrEstados = estados;
+      console.log(estados);
+      
     })
   }
+
+  private getUnidades(){
+  this.dataApiService.getUnidades().subscribe((unidades: any) => {
+    this.arrActividades = unidades.content;
+   });
+ 
+ }
+ 
+  changeEstado()
+ {
+   this.dataApiService.getMunicipios(this.selectedEstado)
+   .subscribe((municipios: any) => {
+     console.log(municipios);
+     
+    this.arrMunicipios = municipios;
+
+   });
+ 
+ }
+
+ changeMunicipio()
+ {
+   this.dataApiService.getlocalidades(this.selectedMunicipio)
+   .subscribe((localidades: any) => {
+     console.log(localidades);
+     
+    this.arrLocalidades = localidades;
+
+   });
+ 
+ }
+ 
+
+  buscarDenues()
+ {
+
+  this.markerService.makeDenuesMarkers(this.map,
+    this.selectedEstado,
+    this.selectedMunicipio,
+    this.selectedUnidad
+    );
+
+ }
 
 }

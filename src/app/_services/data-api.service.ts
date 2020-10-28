@@ -4,6 +4,12 @@ import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 
 import { Estados } from '../models/estados';
+import { Municipios } from '../models/municipios';
+import { Unidades } from '../models/unidades';
+import { Denues } from '../models/denues';
+
+import { Localidades } from '../models/localidades';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -37,6 +43,46 @@ export class DataApiService {
       return this.http.get<Estados>(path, this.httpOptions);
     }
   
+    getMunicipios(idestado): Observable<Municipios> {
+      console.log("municipios: " + this.apiURL);
+      return this.http.get<Municipios>(this.apiURL + 'municipios?idestado=' + idestado, this.httpOptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      )
+    }   
+  
+    getlocalidades(idmunicipio): Observable<Localidades> {
+      console.log("localidades: " + this.apiURL);
+      return this.http.get<Localidades>(this.apiURL + 'localidad?idmunicipio=' + idmunicipio, this.httpOptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      )
+    } 
+  
+   
+  getUnidades(): Observable<Unidades> {
+    console.log("unidades: " + this.apiURL);
+    return this.http.get<Unidades>(this.apiURL + 'categorias', this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    )
+  }   
+ 
+  
+  
+  
+    getDenues(idestado, idmunicipio, tipo): Observable<Denues> {
+      console.log("denues: " + this.apiURL + idestado);
+      return this.http.get<Denues>(this.apiURL + 'empresas?idestado=' + idestado +
+      '&idmunicipio=' + idmunicipio + '&tipo=' + tipo, this.httpOptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      )
+    }
 
 
     handleError(error) {

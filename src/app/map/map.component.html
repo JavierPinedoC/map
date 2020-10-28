@@ -22,6 +22,8 @@
          {{loc.localidad}}
        </option>
      </select>
+     
+      <label for="poblacion"><b>Población </b></label>
       
        <b> Unidad Economica </b>
        <select  name="selectedUnidad" id="selectedUnidad" [(ngModel)]="selectedUnidad">
@@ -31,7 +33,6 @@
       </select>
       {{selectedUnidad}}
 
-      
 
       <button (click)="buscarDenues()" type=”button”>Buscar</button>
 

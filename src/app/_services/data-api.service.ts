@@ -52,14 +52,23 @@ export class DataApiService {
       )
     }   
   
-    getlocalidades(idmunicipio): Observable<Localidades> {
+    getlocalidades(idmunicipio, idestado): Observable<Localidades> {
       console.log("localidades: " + this.apiURL);
-      return this.http.get<Localidades>(this.apiURL + 'localidad?idmunicipio=' + idmunicipio, this.httpOptions)
+      return this.http.get<Localidades>(this.apiURL + 'localidad?idmunicipio=' + idmunicipio + '&idestado=' + idestado, this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)
       )
-    } 
+    }
+
+    // getPoblacion(idlocalidad, idestado, idmunicipio): Observable<Poblacion> {
+    //   console.log("poblacion: " + this.apiURL);
+    //   return this.http.get<Poblacion>(this.apiURL + 'poblacion?localidad=' + idlocalidad, this.httpOptions)
+    //   .pipe(
+    //     retry(1),
+    //     catchError(this.handleError)
+    //   )
+    // }
   
    
   getUnidades(): Observable<Unidades> {

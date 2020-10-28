@@ -99,7 +99,7 @@ export class MapComponent implements AfterViewInit {
 
  changeMunicipio()
  {
-   this.dataApiService.getlocalidades(this.selectedMunicipio)
+   this.dataApiService.getlocalidades(this.selectedMunicipio, this.selectedEstado)
    .subscribe((localidades: any) => {
      console.log(localidades);
      

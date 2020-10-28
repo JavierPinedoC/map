@@ -15,7 +15,8 @@ import { Poblacion } from '../models/poblacion';
 })
 export class DataApiService {
 
-  apiURL = 'http://localhost:8080/api/auth/';
+  // apiURL = 'http://localhost:8080/api/auth/';
+  apiURL = 'http://104.198.244.0:8123/api/auth/';
 
   constructor(private http: HttpClient) { }
 
